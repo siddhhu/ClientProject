@@ -143,47 +143,6 @@
       <h2 style="margin-top: 40px;margin-left: 20px;">You are logged in as student. In this portal you can ask questions that you want and can view the questions asked by other students. This portal is totally dedicated for academics</h2>
       <br>
     </div>
-    <div class="box"></div>
-<div class="boxed">
-<div>
-<div id="chatbox">
-<img
-src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dreamstime.com%2Fphotos-images%2Facademic.html&psig=AOvVaw36liXtdpGGdapi5fyd2KbR&ust=1636455288083000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCIDm-ZLNiPQCFQAAAAAdAAAAABAD"
-alt="CANDICE"
-style="width:50px;height:50px;"
-/>
-<p class="botText">
-<span>Hello there! I am Academics Chatbot!!</span>
-</p>
-</div>
-<div id="userInput">
-<input id="textInput" type="text" name="msg" placeholder="Message" />
-</div>
-</div>
-<script>
-        function getBotResponse() {
-          var rawText = $("#textInput").val();
-          var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
-          $("#textInput").val("");
-          $("#chatbox").append(userHtml);
-          document
-            .getElementById("userInput")
-            .scrollIntoView({ block: "start", behavior: "smooth" });
-          $.get("/get", { msg: rawText }).done(function(data) {
-            var botHtml = '<p class="botText"><span>' + data + "</span></p>";
-            $("#chatbox").append(botHtml);
-            document
-              .getElementById("userInput")
-              .scrollIntoView({ block: "start", behavior: "smooth" });
-          });
-        }
-        $("#textInput").keypress(function(e) {
-          if (e.which == 13) {
-            getBotResponse();
-          }
-        });
-      </script>
-</div>
 
 <br>
 

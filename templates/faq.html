@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ PAGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<style>
+body{
+    font-family: 'Work Sans', sans-serif;
+}
+.faq-heading{
+    border-bottom: #777;
+    padding: 20px 60px;
+}
+.faq-container{
+display: flex;
+justify-content: center;
+flex-direction: column;
+
+}
+.hr-line{
+  width: 60%;
+  margin: auto;
+  
+}
+/* Style the buttons that are used to open and close the faq-page body */
+.faq-page {
+    /* background-color: #eee; */
+    color: #444;
+    cursor: pointer;
+    padding: 30px 20px;
+    width: 60%;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin: auto;
+
+}
+.faq-body{
+    margin: auto;
+    /* text-align: center; */
+   width: 50%; 
+   padding: auto;
+   
+}
+
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.faq-page:hover {
+    background-color: #F9F9F9;
+}
+
+/* Style the faq-page panel. Note: hidden by default */
+.faq-body {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
+
+.faq-page:after {
+    content: '\02795';
+    /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2796";
+    /* Unicode character for "minus" sign (-) */
+}
+    </style>
+<body>
+    <main>
+
+        <h1 class="faq-heading" style="color: red;"><marquee>Top Questions Asked by Students?</marquee></h1>
+        <section class="faq-container">
+            <div class="faq-one">
+
+                <!-- faq question -->
+                <h1 class="faq-page">How this Platform is Unique?</h1>
+
+                <!-- faq answer -->
+                <div class="faq-body">
+                    <p>This Platform helps student to get their query answered at earliest. This platform is best because all of the queries can be answered in go with Invalid questions marked as spam!</p>
+                </div>
+            </div>
+            <hr class="hr-line">
+
+            <div class="faq-two">
+
+                <!-- faq question -->
+                <h1 class="faq-page">Why do we need this platform?</h1>
+
+                <!-- faq answer -->
+
+                <div class="faq-body">
+                    <p>In College there are lot of students and answering query of each student is difficult for teachers so here comes the uniqueness of portal where user can get the query. They can ask whatever doubt they want?</p>
+                </div>
+            </div>
+            <hr class="hr-line">
+
+            <div class="faq-two">
+
+                <!-- faq question -->
+                <h1 class="faq-page">What is the time to get the reply from faculty?</h1>
+
+                <!-- faq answer -->
+
+                <div class="faq-body">
+                    <p>There is no barrier of time, whenever a faculty loggin and they have question in their bank. they are required to answer them and there is no dependency on teachers. Even the student who are hesistant in asking can ask question.</p>
+                </div>
+            </div>
+            <hr class="hr-line">
+
+            <div class="faq-two">
+
+                <!-- faq question -->
+                <h1 class="faq-page">Can we ask answer other than related to academics?</h1>
+
+                <!-- faq answer -->
+
+                <div class="faq-body">
+                    <p>This Platform is solely for academics purpose but if required user can ask the personal thing as well but that depends upon faculty, if he/she is willing to answer the query.!</p>
+                </div>
+            </div>
+            <hr class="hr-line">
+
+            <div class="faq-two">
+
+                <!-- faq question -->
+                <h1 class="faq-page">What are the featues of this platform?</h1>
+
+                <!-- faq answer -->
+
+                <div class="faq-body">
+                    <p>The fatures of the platform includes answer from verified faculty, question which is unethical can be marked as Invalid, ethical answer easily Identifiable with different color tags.</p>
+                </div>
+            </div>
+            <hr class="hr-line">
+
+            <div class="faq-two">
+
+                <!-- faq question -->
+                <h1 class="faq-page">Can we ask questions related to Placements?</h1>
+
+                <!-- faq answer -->
+
+                <div class="faq-body">
+                    <p>yes, definetely we can ask the questions which is related to academics and ofcourse placement is related to academics so will defenitely get answers related to placement?</p>
+                </div>
+            </div>
+
+            <hr class="hr-line">
+
+
+            <div class="faq-three">
+
+                <!-- faq question -->
+<h1 class="faq-page">Can we students communicate using this website?</h1>
+
+                <!-- faq answer -->
+                <div class="faq-body">
+                    <p>No, this website is for teacher & student communication. Student can not communicate with another student as there is always faculty-student relationship.</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    
+</body>
+<script>
+   
+var faq = document.getElementsByClassName("faq-page");
+var i;
+
+for (i = 0; i < faq.length; i++) {
+    faq[i].addEventListener("click", function () {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
+
+        /* Toggle between hiding and showing the active panel */
+        var body = this.nextElementSibling;
+        if (body.style.display === "block") {
+            body.style.display = "none";
+        } else {
+            body.style.display = "block";
+        }
+    });
+}
+    </script>
+
+
+</html>

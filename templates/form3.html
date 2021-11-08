@@ -1,0 +1,107 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Your Questions</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>  
+<style>
+
+    .styled-table {
+    border-collapse: collapse;
+    margin: 35px 0;
+    margin-left:115px;
+    font-size: 30px;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: red;
+    color: #ffffff;
+    text-align: center;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    
+}
+.styled-table tbody tr {
+    border-bottom: thin solid #dddddd;
+   
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+   
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid red;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+    
+}
+
+
+th ,tr{
+  height: 70px;
+}
+
+
+</style>
+<body>  
+    <section id="page">
+    <div class="container">
+        <br><br><br>
+        <h1 style="color:red;margin-left:115px;"> <strong>Hello {{active_user}}, These are the questions that you have asked.</strong></h1></br>
+        <p style="color:red;margin-left:115px;font-family: sans-serif;font-weight: bold;">This question answering platform is very good for students where they can ask the questions and admin can follow up and reply at the earliest. Here are some questions asked by you</p>
+        <table class="styled-table">
+    <thead>
+        <tr style="font-size: x-large;">
+            
+        <td><strong></strong>S.NO</strong></td>  
+        <td><strong></strong>Queries Asked</strong></td>  
+        <td><strong></strong>Answer</strong></td>  
+        <td><strong></strong>Date</strong></td>  
+
+        </tr>
+    </thead>
+     {% for row in rows %}  
+        <tr style="font-size: medium;">  
+            <td>{{row.id}}</td>  
+            <td>{{row.doubt}}</td>
+            {% if row.answer== None %}
+            <td style="color:orange">Not Answered</td> 
+            {% elif row.answer!= None and 'Question Marked as Invalid!!' not in row.answer %}
+            <td style="color:green">{{row.answer}}</td> 
+            {% else  %}
+            <td style="color:red">{{row.answer}}</td> 
+            {% endif %}
+
+
+
+
+            <td>{{row.time}}</td>  
+            
+
+           
+         
+        </tr>  
+      
+    {% endfor %}  
+</table>  
+<br><br>
+<form action="/welcome" method="GET">
+<button class="btn btn-danger" style="margin-left:115px;">Home page</button>
+</form> 
+</div>
+</section>
+  
+</body>  
+</html>  

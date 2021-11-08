@@ -1,0 +1,91 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Player Report</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>  
+<style>
+
+    .styled-table {
+    border-collapse: collapse;
+    margin: 35px 0;
+    margin-left:115px;
+    font-size: 30px;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: red;
+    color: #ffffff;
+    text-align: center;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    
+}
+.styled-table tbody tr {
+    border-bottom: thin solid #dddddd;
+   
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+   
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid red;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+    
+}
+
+</style>
+<body>  
+    <section id="page">
+    <div class="container">
+        <br><br><br>
+        <h1 style="color:red;margin-left:115px;"> <strong>Hello {{active_user}}, this is your statistics...</strong></h1></br>
+        <p style="color:red;margin-left:115px;font-family: sans-serif;font-weight: bold;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        <table class="styled-table">
+    <thead>
+        <tr>
+            
+        <td><strong></strong>ID</strong></td>  
+        <td><strong></strong>Active User</strong></td> 
+        <td><strong></strong>Date </strong></td>  
+        <td><strong></strong>Withdrawal Amount</strong></td>  
+        <td><strong></strong>Status</strong></td> 
+        
+        </tr>
+    </thead>
+     {% for row in rows %}  
+        <tr>  
+     
+            <td><strong>{{row[0]}}</strong></td>  
+            <td><strong>{{row[4]}}</strong></td>  
+            <td><strong>{{row[1]}}</strong></td>  
+            <td><strong>{{row[2]}}</strong></td>  
+            <td><strong>{{row[3]}}</strong></td>  
+            
+        </tr>  
+      
+    {% endfor %}  
+</table>  
+<br><br>
+<form action="/welcome" method="GET">
+<button class="btn btn-danger" style="margin-left:115px;">Play Again</button>
+</form> 
+</div>
+</section>
+  
+</body>  
+</html>  

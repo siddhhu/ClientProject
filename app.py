@@ -62,44 +62,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
     type = StringField('type', validators=[InputRequired(), Length(min=8, max=80)])
     
-with open('file.txt','r') as file:
-    conversation = file.read()
 
-bott = ChatBot("Academics ChatBot")
-trainer2 = ListTrainer(bott)
-trainer2.train([ "Hey",
-    "Hi there!",
-    "Hi",
-    "Hi!",
-    "How are you doing?",
-    "I'm doing great.",
-    "That is good to hear",
-    "Thank you.",
-    "You're welcome.",
-    "What is your name?", "My name is Academics ChatBot",
-    "Who created you?", "Chenna",
-    "What is this platform for?",
-    "It is an end to end application to communicate with faculty & student ",
-    "Email : niretichennakeshva@gmail.com, Mobile number : +91 6300724393 Location : Pune, Maharashtra",
-    "Education",
-    "Bachelor of Engineering (B.E), Computer Science & Engineering\n Pune Vidyarthi Grihas College Of Engineering And Technology Pune '\n'2018 - 2022 '\n'CGPA: 8.84/10 '\n'Senior Secondary (XII), Science Sir Parashurambhau College Pune Maharashtra (MAHARASHTRA STATE BOARD board) Year of completion: 2018 Percentage: 88.40% Secondary (X) Sant Meera School Aurangabad (MAHARASHTRA STATE BOARF board) Year of completion: 2016 Percentage: 96.20%",
-    "Projects",
-    "Course Available in College?", "B.Tech, BCA, MCA, MBA & M.Tech",
-    "Do we have Library Facaility?", "Yes we do have a good library with 100 of rooms where you can do self study. ",
-        "Placement record of the college", "We have placement. A lot of companies are visting in our campus like wipro, Cognizant & Infosys with around 90 % placement records.",
-                "College Name", "Siddhartha Institue of technogy"
-    
-    ])
-trainer = ChatterBotCorpusTrainer(bott)
-trainer.train("chatterbot.corpus.english")
-#trainer2.train(["Thank You","Welcome"])
-
-
-
-@app.route("/get")
-def get_bot_response():
-	userText = request.args.get('msg')
-	return str(bott.get_response(userText))
 @app.route('/',methods=['GET', 'POST'])
 def login():
     if request.method=="GET":

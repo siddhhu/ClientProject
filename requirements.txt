@@ -18,4 +18,5 @@ Werkzeug
 WTForms
 razorpay
 gunicorn
+chatterbot
 

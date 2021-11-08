@@ -13,10 +13,7 @@ from datetime import datetime
 from datetime import date
 import sqlite3
 import razorpay
-from flask import Flask, render_template, request
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
-from chatterbot.trainers import ListTrainer
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'

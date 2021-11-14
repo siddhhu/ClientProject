@@ -13,10 +13,19 @@ from datetime import datetime
 from datetime import date
 import sqlite3
 import razorpay
-from flask import Flask, render_template, request
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
-from chatterbot.trainers import ListTrainer
+from flask import Flask, render_template, request, session, redirect, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail
+import math
+import string
+import random
+import urllib
+import json
+import os
+from datetime import datetime
+import re
+
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
@@ -62,44 +71,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
     type = StringField('type', validators=[InputRequired(), Length(min=8, max=80)])
     
-with open('file.txt','r') as file:
-    conversation = file.read()
 
-bott = ChatBot("Academics ChatBot")
-trainer2 = ListTrainer(bott)
-trainer2.train([ "Hey",
-    "Hi there!",
-    "Hi",
-    "Hi!",
-    "How are you doing?",
-    "I'm doing great.",
-    "That is good to hear",
-    "Thank you.",
-    "You're welcome.",
-    "What is your name?", "My name is Academics ChatBot",
-    "Who created you?", "Chenna",
-    "What is this platform for?",
-    "It is an end to end application to communicate with faculty & student ",
-    "Email : niretichennakeshva@gmail.com, Mobile number : +91 6300724393 Location : Pune, Maharashtra",
-    "Education",
-    "Bachelor of Engineering (B.E), Computer Science & Engineering\n Pune Vidyarthi Grihas College Of Engineering And Technology Pune '\n'2018 - 2022 '\n'CGPA: 8.84/10 '\n'Senior Secondary (XII), Science Sir Parashurambhau College Pune Maharashtra (MAHARASHTRA STATE BOARD board) Year of completion: 2018 Percentage: 88.40% Secondary (X) Sant Meera School Aurangabad (MAHARASHTRA STATE BOARF board) Year of completion: 2016 Percentage: 96.20%",
-    "Projects",
-    "Course Available in College?", "B.Tech, BCA, MCA, MBA & M.Tech",
-    "Do we have Library Facaility?", "Yes we do have a good library with 100 of rooms where you can do self study. ",
-        "Placement record of the college", "We have placement. A lot of companies are visting in our campus like wipro, Cognizant & Infosys with around 90 % placement records.",
-                "College Name", "Siddhartha Institue of technogy"
-    
-    ])
-trainer = ChatterBotCorpusTrainer(bott)
-trainer.train("chatterbot.corpus.english")
-#trainer2.train(["Thank You","Welcome"])
-
-
-
-@app.route("/get")
-def get_bot_response():
-	userText = request.args.get('msg')
-	return str(bott.get_response(userText))
 @app.route('/',methods=['GET', 'POST'])
 def login():
     if request.method=="GET":
@@ -145,7 +117,98 @@ def answered():
                 db.session.commit()
                 return render_template("success.html")
 
-       
+@app.route("/ans",methods = ['GET','POST'])
+def ans():
+    if request.method == 'POST':
+        todo_data = request.get_json()
+        content=todo_data['userInput']
+        content1 = str(content)
+        print(content1)
+        print("I came to ans")
+        answer = chatbot_query(content1)
+        return answer
+    else:
+        return "Din succeed"
+
+def greeting(searchtext):
+    #if the user's sentence is some greeting return a randomly chosen greeting response
+    robo_response = " "
+    with open('/Users/siddhartha/Documents/Development/headandtail-master/json_files/intents.json', 'r') as file1:
+        data1 = json.load(file1)
+
+    for intent1 in data1['intents']:
+        for pattern1 in intent1['patterns']:
+            if pattern1.lower() == searchtext:
+                robo_response = random.choice(intent1['responses'])
+                break
+    return robo_response
+
+# Generate the response
+def response(searchtext):
+    print("I am in function response")
+    count = 0
+    robo_response = " "
+    str1 = " "
+    remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
+    searchtext = searchtext.lower().translate(remove_punct_dict)
+    #print("Search text is:"+searchtext)
+    robo_response = greeting(searchtext)
+    if robo_response != "":
+        return robo_response
+    else:
+        with open('/Users/siddhartha/Documents/Development/headandtail-master/json_files/QDas.json', 'r') as file2:
+            data = json.load(file2)
+            print(data)
+        remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
+        searchtext = searchtext.lower().translate(remove_punct_dict)
+        list1 = ["qsstat", "qs stat", "solara","sollara", "procella","procela", "mqis", "m qis","mqs", "oqis","oqs", "o qis", "install", "citrix","citrx","online", "desktop","desktp", "notebook","notebk", "qdas", "q das","qds", "upload","upld", "spc"]
+        list2 = ["access","accss","acess", "issue","isue", "problem","prblm", "ticket","tckt", "contact","cntct"]
+        print(searchtext)
+        for i in list1:
+            if (searchtext.find(i) != -1):
+                if i == "q das" or i == "qs stat" or i == "m qis" or i == "o qis":
+                    i = re.sub('[\s+]', '', i)
+                str1 = str1 + i + " "
+        for j in list2:
+            if (searchtext.find(j) != -1):
+                str1 = str1 + j + " "
+        str2 = str1[:len(str1) - 1]
+        for intent in data['intents']:
+            for pattern in intent['patterns']:
+                if pattern.lower() == str2:
+                    print("1")
+                    robo_response = random.choice(intent['responses'])
+                    count = 1
+                    break
+
+        if count == 1:
+            print(robo_response)
+            #k = databasetransfer("known", searchtext, robo_response)
+
+        else:
+            robo_resp = ["Can you re-frame the sentence with correct grammar. I might be able to answer better", "I am a bit old school and have issues with abbreviations. LOL! Could you please rectify the sentence with any such issue and try again", "Please use Q-Das related terms so that it will be helpful for me to give a better search result for you","Uhmmm.. I am out of answers this time.. Can I interest you in having a look at Q-Das home page. You might find relevant documents there. <a href=https://inside-docupedia.bosch.com/confluence/display/qdas/Q-DAS+Home>Q-Das Home</a>"]
+            robo_response = random.choice(robo_resp)
+            #k = databasetransfer("unknown", searchtext, robo_response)
+        return robo_response
+
+def chatbot_query(user_resp , index=0):
+    fallback = 'Sorry, I cannot think of a reply for that.'
+    result = ''
+    user_res = []
+    user_response = str(user_resp)
+    user_response = user_response.lower()
+    #user_res = user_response.split("'")
+    try:
+        print("I am in try block")
+        print(user_response)
+        result = result + ""+response(user_response)
+        return result
+
+    except:
+        if len(result) == 0:
+            result += fallback
+        return result
+     
 
 @app.route("/invalid",methods=["GET","POST"])
 def invalid():

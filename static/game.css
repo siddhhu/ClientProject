@@ -1,7 +1,4 @@
-html {
-    position: relative;
-    min-height: 100%;
-}
+
 footer {
     position: absolute;
     bottom: 0;
@@ -11,12 +8,11 @@ footer {
     font-weight:bolder ;
     padding-bottom: 20px;
 }
-body {
-    height: 100%;
-    margin-bottom: 100px;
-    padding: 0px;
-    margin: 0px;
+nav {
+    position: fixed;
+   
 }
+
 .autoTrader-content{
     margin-left: 10rem;
     width: 50em;
@@ -29,17 +25,8 @@ body {
     position: relative;
 }
 
-.navbar-expand-lg .navbar-nav .nav-item{
-    padding-right:3.2rem;
-    padding-left: 3.2rem;
-    color: black;
-    font-weight: bold;
-    
-}
-.navbar-expand-lg .navbar-nav .nav-item .nav-link:hover{
-    color: red;
-    font-size: larger;
-}
+
+
 #mainHeading{
     text-align: center;
     padding-top: 20px;

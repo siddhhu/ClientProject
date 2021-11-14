@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Q-Bot</title>
+</head>
+<body>
+    <section class="msger">
+        <header class="msger-header">
+            <div class="msger-header-title">
+                <i class="fas fa-comment-alt"></i> QChat
+            </div>
+            <div class="msger-header-options">
+                .
+                <span><i class="fas fa-cog"></i></span>
+            </div>
+        </header>
+
+        <main class="msger-chat">
+            <div class="msg left-msg">
+                <div class="msg-img"
+                     style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"></div>
+
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">QBOT</div>
+                        <div class="msg-info-time"><span id="datetime"></span></div>
+                    </div>
+                    <script>
+         var dt = new Date();
+         var h = dt.getHours();
+         var m = dt.getMinutes();
+         document.getElementById('datetime').innerHTML = h + ":" + m;
+                    </script>
+                    <div class="msg-text">
+                        Hi, welcome to QChat! Go ahead and send me a query about Q-Das. ??
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+
+        <form class="msger-inputarea" method="POST">
+            <input type="text" class="msger-input" placeholder="Enter your message...">
+            <button type="submit" class="msger-send-btn">Send</button>
+        </form>
+    </section>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

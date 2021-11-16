@@ -20,7 +20,8 @@
 							"Hello!",
 							"Good to see you!",
 							"Hi there, how can I help?",
-							"hey buddy!!"
+							"hey buddy!!",
+							"how can i help"
 					],
 					"context_set": ""
 			},
@@ -716,7 +717,7 @@
 							"metro station nearby"
 					],
 					"responses":[
-							"Najafgarh metro station"
+						"Semeseter Fee : RS 100000 \n BUS FEE : 2000"
 					]
 			}
 

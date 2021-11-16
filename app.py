@@ -78,14 +78,19 @@ def login():
 	    return render_template('game.html')
     if request.method=="POST" :
         username=request.form.get('username')
-        user=User.query.filter_by(username=username).first()
-        session["user"]=user.username
-        session["type"]=user.type
-        print("This is user type"+user.type)
-        if user and user.type=='student':
+        password=request.form.get('password')
+        user=User.query.filter_by(username=username,password=password).first()
+        print(user)
+        if user is not None and user.type=='student':
+            session["user"]=user.username
+            session["type"]=user.type
             return redirect("/welcome")
+        elif user is not None and user.type=='admin':
+            session["user"]=user.username
+            session["type"]=user.type
+            return redirect("/admin")
         else:
-            return redirect("admin")
+            return render_template("game.html",msg="Incorrect Credentails")
 @app.route("/admin")
 def admin():
     current_user=session["user"]
@@ -224,8 +229,7 @@ def signup():
         password=request.form.get('password')
         email=request.form.get('email')
         type=request.form.get('type')
-        hashed_password = generate_password_hash(password, method='sha256')
-        new_user = User(username=username, email=email, password=hashed_password,type=type)
+        new_user = User(username=username, email=email, password=password,type=type)
         db.session.add(new_user)
         db.session.commit()
         print(new_user.email)
